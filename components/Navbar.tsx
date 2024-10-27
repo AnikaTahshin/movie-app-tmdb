@@ -1,18 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
-const Navbar = ({inputSearch,setInputSearch}:any) => {
-
+const Navbar = ({ searchInput, setSearchInput }:any) => {
 
   const handleInputChange = (e:any) => {
-    console.log("inputSearch the val",inputSearch)
-
-    // setInputSearch(e.target.value);  
+    setSearchInput(e.target.value); 
   };
-
-
+ 
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -71,8 +67,8 @@ const Navbar = ({inputSearch,setInputSearch}:any) => {
               </div>
               <input
                 type="text"
-                onChange={handleInputChange}
-                value={inputSearch}
+                value={searchInput}
+        onChange={handleInputChange}
                 id="search-navbar"
                 className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search..."
@@ -103,8 +99,8 @@ const Navbar = ({inputSearch,setInputSearch}:any) => {
               </div>
               <input
                 type="text"
-                onChange={handleInputChange}
-                value={inputSearch}
+                value={searchInput}
+        onChange={handleInputChange}
                 id="search-navbar"
                 className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search..."

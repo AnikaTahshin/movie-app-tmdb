@@ -66,7 +66,6 @@ const DetailsPage = () => {
   };
 
 
-  console.log("anika cast api res",recommendedData)
 
   useEffect(() => {
     getDetails();

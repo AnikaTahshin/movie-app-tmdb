@@ -30,10 +30,9 @@ const DetailsPage = () => {
 
 
   const castApi = async () => {
-    if (!params?.id) return; // Ensure there is an ID
+    if (!params?.id) return; 
 
     const response = await fetch(
-    //   `https://api.themoviedb.org/3/movie/${params.id}?language=en-US`,
       `https://api.themoviedb.org/3/movie/${params.id}/credits?language=en-US`,
       {
         headers: {
@@ -52,7 +51,6 @@ const DetailsPage = () => {
 
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${params.id}/recommendations?language=en-US&page=1`,
-    //   `https://api.themoviedb.org/3/movie/${params.id}/credits?language=en-US`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

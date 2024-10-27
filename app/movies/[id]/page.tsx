@@ -7,7 +7,7 @@ const DetailsPage = () => {
     "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NGI0NjdmYjBlNWFiYTE0ZTRmYjdiM2U4ODllMTg0NyIsIm5iZiI6MTcyOTk0NTQ3OC40ODc2ODIsInN1YiI6IjY0MTBhZDFiZWRlMWIwMjg3ZmRhZjZkZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1d9JxIqJRR1Y2zwLUQ-hI6qy4Ac2XVFOX-dNq7Dt0ss";
 
   const params = useParams();
-  const [detailsData, setDetailsData] = useState(null);
+  const [detailsData, setDetailsData]:any = useState();
   const [cast, setCast] = useState([])
   const [recommendedData, setRecommendedData] = useState()
 
@@ -102,7 +102,7 @@ const DetailsPage = () => {
         <div className="flex items-center">
           <div className="text-sm">
         
-            {detailsData?.genres?.map((item) => (
+            {detailsData?.genres?.map((item:any) => (
               <p key={item.id} className="text-gray-700">
                 {item.name}
               </p>

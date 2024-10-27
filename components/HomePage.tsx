@@ -32,7 +32,7 @@ const fetchMovies = async ({ pageParam = 1 }: { pageParam?: number }) => {
 };
 
 const HomePage = ({ searchInput }: any) => {
-  const [addedMovies, setAddedMovies] = useState([]);
+  const [addedMovies, setAddedMovies]: any = useState([]);
   // INFINITE SCROLL TO SHOW MORE DATA
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
@@ -44,8 +44,8 @@ const HomePage = ({ searchInput }: any) => {
         }
         return undefined;
       },
+      initialPageParam: undefined, // Add this line
     });
-
   const searchMovieByTitle = async () => {
     const response = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=64b467fb0e5aba14e4fb7b3e889e1847&query=${searchInput}&include_adult=false&language=en-US`,
@@ -94,7 +94,6 @@ const HomePage = ({ searchInput }: any) => {
     }
   };
 
-
   // const clearWatchlist = async (movie:MovieType) => {
 
   //   if (!movie || !movie.id) {
@@ -108,16 +107,16 @@ const HomePage = ({ searchInput }: any) => {
   //   return data;
   // };
 
-  const removeFromWatchList = async (movie:MovieType) => {
+  const removeFromWatchList = async (movie: MovieType) => {
     const response = await fetch(`/api/watchlist?id=${movie.id}`, {
       method: "DELETE",
     });
-  
+
     const updatedWatchlist = await response.json();
-    setAddedMovies(updatedWatchlist.map(m => m.id)); // Update state if necessary
+    setAddedMovies(updatedWatchlist?.map((m: any) => m.id)); // Update state if necessary
   };
   return (
-    <div>
+    <>
       {/* display data searched by title */}
       {searchTitleData?.results?.length > 0 ? (
         <div className="flex flex-col items-center justify-center md:grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -143,23 +142,19 @@ const HomePage = ({ searchInput }: any) => {
             </Link>
           ))}
         </div>
-      ) : // display home page data
-      data?.pages?.length > 0 ? (
+      ) : data?.pages?.length ? ( // Change this line
         <div className="flex flex-col items-center justify-center md:grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {data.pages.map((page) =>
-            page.results.map((movie: MovieType) => (
-              <Link
-                key={movie.id}
-                href={""}
-                // href={{
-                //   pathname: `/movies/${movie.id}`,
-                // }}
-              >
-                {/* <div></div> */}
+          {data?.pages?.map((page) =>
+            page?.results?.map((movie: MovieType) => (
+              <Link key={movie.id} href={""}>
                 <div className="max-w-sm relative cursor-pointer bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <div className="absolute right-2 top-2">
                     {addedMovies.includes(movie.id) ? (
-                      <FaHeart onClick={() => removeFromWatchList(movie)} size={25} color="red" />
+                      <FaHeart
+                        onClick={() => removeFromWatchList(movie)}
+                        size={25}
+                        color="red"
+                      />
                     ) : (
                       <FaRegHeart
                         onClick={() => addToWatchList(movie)}
@@ -195,7 +190,7 @@ const HomePage = ({ searchInput }: any) => {
       ) : (
         <div>No data available</div>
       )}
-    </div>
+    </>
   );
 };
 
